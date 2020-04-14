@@ -4,5 +4,48 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+		<bean class="com.naver.s3.robot.Robot" id="robot">
+			<property name="leftArm" ref="leftArm"></property>
+			<property name="rightArm" ref="rightArm"></property>
+		</bean>
 		
+		<bean class="com.naver.s3.robot.Robot" id="robot2">
+			<constructor-arg name="leftArm" ref="leftArm"></constructor-arg>
+			<constructor-arg name="rightArm" ref="rightArm"></constructor-arg>
+		</bean>
+		
+		
+		<!-- setter 기본생성자가 있어야하는 경우 -->
+		<bean class="com.naver.s3.robot.LeftArm" id="leftArm">
+			<property name="name" value="jay"></property>
+			<property name="size" value="20"></property>
+		</bean>
+		
+		<!-- 매개변수가 있는 생성자를 사용하는 경우 -->
+		<bean class="com.naver.s3.robot.RightArm" id="rightArm">
+			<!-- 
+			<constructor-arg name="color" value="red"></constructor-arg>
+			<constructor-arg name="power" value="100"></constructor-arg> 
+			
+			<constructor-arg index="0" value="20"></constructor-arg>
+			<constructor-arg index="1" value="blue"></constructor-arg>
+			-->
+			<constructor-arg type="java.lang.Integer" value="20"></constructor-arg>
+			<constructor-arg type="java.lang.String" value="red"></constructor-arg>
+			
+		</bean>
+	
+	
+	
+	
+	<!-- MemberDAO memberDAO = new MemberDAO() 객체생성 -->
+	<bean class="com.naver.s3.member.MemberDAO" id="memberDAO"></bean>
+	
+	<!-- MemberService memberService =  new MeberService() -->
+	<bean class="com.naver.s3.member.MemberService" id="memberService">
+		<!-- memberService.setMeberDAO(memberDAO) (setter) -->
+		<property name="memberDAO" ref="memberDAO"></property>	
+	</bean>
+	
+	
 </beans>
